@@ -46,21 +46,18 @@ app.post('/search', (req, res) =>{
   if(req.body.search[1]==='title')url+='intitle:';
   if(req.body.search[1]==='author')url+='inauthor:';
   url+=req.body.search[0];
-  console.log(url);
+  // console.log(url);
   url+=req.body[0];
   return superagent.get(url)
-		.then(apiRes => {
-			console.log(apiRes);
-			apiRes.body.items.map(book => new Book(book.volumeInfo));
-		})
+    .then(apiRes => apiRes.body.items.map(book => new Book(book.volumeInfo)))
     .then(results => res.render('pages/results', {searchResults: results}));
 });
 
 function Book(data){
-  this.title = data.title;
-  this.authors = data.authors;
-  this.description = data.description;
-  this.image = data.imageLinks.medium;
+  this.title = data.title?data.title:'Unknown';
+  this.authors = data.authors?data.authors:['Unknown'];
+  this.description = data.description?data.description:'No description.';
+  this.image = data.imageLinks.thumbnail?data.imageLinks.thumbnail:'./img/book-icon-135.png';
 }
 
 // let list =[];
