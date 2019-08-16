@@ -4,6 +4,12 @@
 const express = require('express');
 const app = express();
 
+
+//add cors and superagent
+const cors = require('cors');
+app.use(cors());
+const superagent = require('superagent');
+
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
@@ -34,9 +40,18 @@ app.get('/about', (req, res) => {
 });
 
 //search function
-app.get('/search', (req, res) =>{
+app.post('/searches', (req, res) =>{
+  let url = '';
+  return superagent.get(url)
+    .then( res => res.body.map(book => new Book(book)))
+});
 
-})
+function Book(data){
+  this.title = data.volumeInfo.title;
+  this.authors = data.volumeInfo.authors;
+  this.description = data.description;
+  this.image = data.imagelinks.medium;
+}
 
 let list =[];
 app.listen(PORT);
