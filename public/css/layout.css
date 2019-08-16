@@ -1,35 +1,36 @@
 
-
-ul{
-    width:
+main > section{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    padding: 1.5em 1.5em;
 }
 
-li{
-    margin:
+article{
+    border-radius: 2px;
+    background: #c8d3ff;
+    color: #7e7fae;
+    box-shadow: 0 2px 8px rgba(0,0,0,.75);
+    min-width: 225px;
+    width: 250px;
+    margin: 1.5em 1em;
+    padding: 1em 6em;
+    text-align: center;
+    font-weight: bolder;
 }
 
-div{
-width:
-height:
-margin:
-border:
-padding:
-
-}
-ul{
-width:
-}
-
-.div{
-height:
-width:
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background: #7e7fae;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 1em 0;
+    font-size: 20px;
 }
 
-input{
-border:
+footer *{
+    margin: 0 1.5em;
 }
-
-li div{
-width:
-}
-
