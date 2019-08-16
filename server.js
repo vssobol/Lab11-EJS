@@ -16,12 +16,13 @@ app.set('view engine', 'ejs');
 const PORT=process.env.PORT||8080;
 app.use(express.urlencoded({extended:true}));
 app.use(express.static('./public'));
+app.use(express.urlencoded({extended:true}));
 //message
 
-app.post('/contact',(req, res)=>{
-  console.log(req.body);
-  res.sendFile('./thanks.html',{root:'./public'});
-});
+// app.post('/contact',(req, res)=>{
+//   console.log(req.body);
+//   res.sendFile('./thanks.html',{root:'./public'});
+// });
 
 // use res.render to load up an ejs view file
 
@@ -40,20 +41,29 @@ app.get('/about', (req, res) => {
 });
 
 //search function
-app.post('/searches', (req, res) =>{
-  let url = '';
+app.post('/search', (req, res) =>{
+  let url = `https://www.googleapis.com/books/v1/volumes?maxResults=10&orderBy=relevance&q=`;
+  if(req.body.search[1]==='title')url+='intitle:';
+  if(req.body.search[1]==='author')url+='inauthor:';
+  url+=req.body.search[0];
+  console.log(url);
+  url+=req.body[0];
   return superagent.get(url)
-    .then( res => res.body.map(book => new Book(book)))
+		.then(apiRes => {
+			console.log(apiRes);
+			apiRes.body.items.map(book => new Book(book.volumeInfo));
+		})
+    .then(results => res.render('pages/results', {searchResults: results}));
 });
 
 function Book(data){
-  this.title = data.volumeInfo.title;
-  this.authors = data.volumeInfo.authors;
+  this.title = data.title;
+  this.authors = data.authors;
   this.description = data.description;
-  this.image = data.imagelinks.medium;
+  this.image = data.imageLinks.medium;
 }
 
-let list =[];
+// let list =[];
 app.listen(PORT);
 console.log(`${PORT} is the magic port`);
 

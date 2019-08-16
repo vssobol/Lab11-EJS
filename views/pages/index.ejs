@@ -14,16 +14,16 @@
         <h3></h3>
         <h4></h4>
         <h5>Total</h5>
-        <form action="/searches" method="post">
-            <legend>Search Books</legend>
-            <label>Search by Title
+        <form action="/search" method="post">
+            <legend>Search By Title or Author</legend>
+            <label>
+                <input type="text" name="search" default="Enter a title or author">
+            </label>
+            <label>Title
                 <input type="radio" name="search" value="title">
             </label>
-            <label>Search by Author
+            <label>Author
                 <input type="radio" name="search" value="author">
-            </label>
-            <label>Search terms:
-                <input type="text" name="search-string">
             </label>
             <button>Submit</button>
         </form>
