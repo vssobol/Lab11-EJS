@@ -25,13 +25,18 @@ app.get('/',(req, res) => {
 });
 
 app.get('/hello', (req, res) => {
-  res.render('pages/index')
+  res.render('pages/hello')
 })
 
 // about page
-app.get('/about', function(req, res) {
+app.get('/about', (req, res) => {
   res.render('pages/about');
 });
+
+//search function
+app.get('/search', (req, res) =>{
+
+})
 
 let list =[];
 app.listen(PORT);
