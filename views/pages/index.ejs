@@ -2,6 +2,10 @@
 <html>
     <head>
         <title>Book App</title>
+        <link rel="stylesheet" href="./styles/reset.css">
+        <link rel="stylesheet" href="./styles/base.css">
+        <link rel="stylesheet" href="./styles/layout.css">
+        <link rel="stylesheet" href="./styles/modules.css">
     </head>
     <body>
         <main>
@@ -10,15 +14,19 @@
         <h3></h3>
         <h4></h4>
         <h5>Total</h5>
-        <ul>
-            <li>stuff</li>
-            <div>more stuff</div>
-            <img src=""/>
-            <a href="">
-    </div>            
-            </li>
-        </ul>
+        <form action="/search" method="post">
+            <legend>Search By Title or Author</legend>
+            <label>
+                <input type="text" name="search" default="Enter a title or author">
+            </label>
+            <label>Title
+                <input type="radio" name="search" value="title">
+            </label>
+            <label>Author
+                <input type="radio" name="search" value="author">
+            </label>
+            <button>Submit</button>
+        </form>
     </main>
     </body>
-    //app.get('/hello')
 </html>
