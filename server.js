@@ -28,11 +28,11 @@ app.use(express.urlencoded({extended:true}));
 
 // index page
 app.get('/',(req, res) => {
-  res.render('pages/index');
+  res.render('index');
 });
 
 app.get('/index',(req, res) => {
-  res.render('pages/index');
+  res.render('index');
 });
 
 app.get('/hello', (req, res) => {
@@ -54,7 +54,8 @@ app.post('/search', (req, res) =>{
   url+=req.body[0];
   return superagent.get(url)
     .then(apiRes => apiRes.body.items.map(book => new Book(book.volumeInfo)))
-    .then(results => res.render('pages/results', {searchResults: results}));
+    .then(results => res.render('pages/results', {searchResults: results}))
+    .catch(err => errorHandler(err));
 });
 
 function Book(data){
@@ -62,6 +63,10 @@ function Book(data){
   this.authors = data.authors?data.authors:['Unknown'];
   this.description = data.description?data.description:'No description.';
   this.image = data.imageLinks.thumbnail?data.imageLinks.thumbnail:'./img/book-icon-135.png';
+}
+
+function errorHandler(err){
+  console.log(`${err.response} error: ${err.message}`);
 }
 
 // let list =[];
