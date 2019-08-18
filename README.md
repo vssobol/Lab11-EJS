@@ -24,6 +24,6 @@ Languages used: HTML5, EJS, CSS, SMACCS, JavaScripts, JSON, Libraries: SQL
 8-17-2019 - Application now deployed through Heroku and has semi-functional express server, with GET and POST routes for the book resource.
 
 ## Credits and Collaborations
-Val - https://github.com/vssobol - CSS, SMACSS, EJS, HTML,Trello Group manager
-Mae - https://github.com/hoarous - Javascript, SQL, Node & Heroku Master
+Val - https://github.com/vssobol - CSS, SMACSS, EJS, HTML,Trello Group manager----
+Mae - https://github.com/hoarous - Javascript, SQL, Node & Heroku Master----
 Caroline Anne - https://github.com/carolineanneok - HTML, EJS, CSS, Javascript, Repo & wireframe design
