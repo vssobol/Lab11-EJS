@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Team Awesome's Book App: Search</title>
+    <%- include('../components/head') %>
+
+  </head>
+  <body>
+    <main>
+      <h4><%- include('../components/nav') %> Search by Title or Author</h4>
+      <div id=searchdiv>
+        <h5 id=searchtitle> Book Search</h5>
+        <form action="/results" method="post" id="searchfield">
+          <input type="text" name="search" placeholder="Enter book title or author" required>
+          <fieldset>
+            <label for="title">
+              <span>Title</span>
+              <input type="radio" name="search" value="title" required>
+            </label>
+          </fieldset>
+          <fieldset>
+            <label for="author">
+              <span>Author</span>
+              <input type="radio" name="search" value="author" required>
+            </label>
+          </fieldset>
+          <button type="submit">Search Google Books</button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
