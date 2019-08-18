@@ -51,4 +51,43 @@ article > p{
     line-height: 1.5em;
 }
 
+#text{
+    text-align: center;
+    display: block;
+    background: white;
+    border: thick inset #eabd90;
+    border-radius: 1em;
+    font-size: 24px;
+    margin: 1.5em auto 1em auto;
+    padding: 1em 3em;
+}
+
+label{
+    text-align: center;
+    display: block;
+    background: #c8d3ff;
+    color: white;
+    text-shadow: -1px -1px 1px #7e7fae, 1px -1px 1px #7e7fae, -1px 1px 1px #7e7fae, 1px 1px 1px #7e7fae;
+    border: thick outset #eabd90;
+    border-radius: 1em;
+    font-size: 24px;
+    font-weight: bold;
+    margin: .5em auto;
+    padding: 1em 6em;
+}
+
+button{
+    text-align: center;
+    display: block;
+    background: #c8d3ff;
+    color: #7e7fae;
+    border: thick outset #eabd90;
+    border-radius: 1em;
+    font-family: "Sawarabi Mincho", sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 1em auto 1.5em auto;
+    padding: 1em 1.95em;
+}
+
 
