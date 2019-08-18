@@ -44,6 +44,10 @@ app.get('/about', (req, res) => {
   res.render('pages/about');
 });
 
+app.get('*', (req, res) =>{
+  res.render('searches/error');
+});
+
 //search function
 app.post('/search', (req, res) =>{
   let url = `https://www.googleapis.com/books/v1/volumes?maxResults=10&orderBy=relevance&q=`;
