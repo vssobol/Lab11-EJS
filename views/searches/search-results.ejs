@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Team Awesome's Book App:Search Results</title>
+        <link rel="stylesheet" href="./css/reset.css">
+        <link rel="stylesheet" href="./css/base.css">
+        <link rel="stylesheet" href="./css/layout.css">
+        <link rel="stylesheet" href="./css/modules.css">
+        <%- include('../components/head') %>
+    </head>
+    <body>
+        <main>
+            <h1> Team Awesome's Book App </h1>
+            <h4> <%- include('../components/nav') %> Search Results </h4>
+            <ul>
+             <% searchesResults.forEach(book => { %>
+             <li>
+            <section>
+            <div class="results">
+            <img src= <%= book.image_url %>/>
+            <button class="hide">Select Book</button>
+            <div class ="toggle details">
+            <h5><%= book.title %></h5>
+            <p class="author">Written By: <%= book.author %></p>
+            <p class="title"><%= title.description %></p>
+            </div>
+            <form action="/add" method="post" class="toggle hidden">
+                <fieldset>
+            <%- include('../components/form', {book: book});%>
+            <form action="/search" method="post">
+                    <legend>Search By Title or Author</legend>
+                    <label>
+                        <input type="text" name="search" default="Enter a title or author">
+                    </label>
+                    <label>Title
+                        <input type="radio" name="search" value="title">
+                    </label>
+                    <label>Author
+                        <input type="radio" name="search" value="author">
+                    </label>
+                    <button type="submit">Add Book</button>
+                </fieldset>
+            </form>
+          </div>
+              </li>
+            <%}) %>
+            </ul>
+        </section>
+    </main>
+        <script src='/js/app.js'></script>
+    </body>
+</html>
+
+
+
+
+
+</html>
