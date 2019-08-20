@@ -136,7 +136,18 @@ function editDetails(request, response) {
     .catch(err => handleError(err, response));
 }
 //search google api-function no api key needed
-
+app.post('/search', (req, res) =>{
+  let url = `https://www.googleapis.com/books/v1/volumes?maxResults=10&orderBy=relevance&q=`;
+  if(req.body.search[1]==='title')url+='intitle:';
+  if(req.body.search[1]==='author')url+='inauthor:';
+  url+=req.body.search[0];
+  // console.log(url);
+  url+=req.body[0];
+  return superagent.get(url)
+    .then(apiRes => apiRes.body.items.map(book => new Book(book.volumeInfo)))
+    .then(results => res.render('pages/results', {searchResults: results}))
+    .catch(err => errorHandler(err));
+});
 //console logs
 
 function errorHandler(err){
