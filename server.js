@@ -114,10 +114,29 @@ return client.query(SQL)
 }
 
 //display details for selected books- a function
-
+function showDetails(request, response) {
+  let SQL = 'SELECT * FROM books WHERE id=$1;';
+  let values = [request.params.book_id];
+  return client.query(SQL, values)
+    .then((details) => {
+      client.query('SELECT DISTINCT bookshelf FROM books;')
+        .then((bookshelves) => {
+          response.render('pages/books/details', {book: details.rows[0], bookshelves: bookshelves.rows})})
+    })
+    .catch(err => handleError(err, response));
+}
 //edit book details
+function editDetails(request, response) {
+  let {title, author, image_url, description, isbn, bookshelf} = request.body;
+  let SQL = `UPDATE books SET title=$1, author=$2, image_url=$3, description=$4, isbn=$5, bookshelf=$6 WHERE id=$7;`;
+  let values = [title, author, image_url, description, isbn, bookshelf, request.params.book_id];
 
-//search google api-function
+  client.query(SQL, values)
+    .then(response.redirect(`/details/${request.params.book_id}`))
+    .catch(err => handleError(err, response));
+}
+//search google api-function no api key needed
+
 //console logs
 
 function errorHandler(err){
