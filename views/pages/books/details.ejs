@@ -1,33 +1,8 @@
-<section></section>// Display details for selected saved book
-function showDetails(request, response) {
-  let SQL = 'SELECT * FROM books WHERE id=$1;';
-  let values = [request.params.book_id];
-  return client.query(SQL, values)
-    .then((details) => {
-      client.query('SELECT DISTINCT bookshelf FROM books;')
-        .then((bookshelves) => {
-          response.render('pages/books/details', {book: details.rows[0], bookshelves: bookshelves.rows})})
-    })
-    .catch(err => handleError(err, response));
-}
-
-// Edit details of a book in your library from the Details page
-function editDetails(request, response) {
-  let {title, author, image_url, description, isbn, bookshelf} = request.body;
-  let SQL = `UPDATE books SET title=$1, author=$2, image_url=$3, description=$4, isbn=$5, bookshelf=$6 WHERE id=$7;`;
-  let values = [title, author, image_url, description, isbn, bookshelf, request.params.book_id];
-
-  client.query(SQL, values)
-    .then(response.redirect(`/details/${request.params.book_id}`))
-    .catch(err => handleError(err, response));
-}
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Book Collection: Details</title>
     <%- include('../components/head') %>
-
   </head>
   <body>
     <main>
@@ -58,6 +33,6 @@ function editDetails(request, response) {
       </div>
     </main>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src='/js/app.js'></script>
+  <script src='public/js/app.js'></script>
   </body>
 </html>
