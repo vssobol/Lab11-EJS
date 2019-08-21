@@ -135,6 +135,7 @@ function editDetails(request, response) {
     .then(response.redirect(`/details/${request.params.book_id}`))
     .catch(err => handleError(err, response));
 }
+
 //search google api-function no api key needed
 app.post('/search', (req, res) =>{
   let url = `https://www.googleapis.com/books/v1/volumes?maxResults=10&orderBy=relevance&q=`;
@@ -149,6 +150,16 @@ app.post('/search', (req, res) =>{
     .catch(err => errorHandler(err));
 });
 //console logs
+
+//delete book function
+function deleteBook(request, response) {
+  let SQL = `DELETE FROM books WHERE id=$1;`;
+  let values = [request.params.book_id];
+
+  client.query(SQL, values)
+    .then(response.redirect('/'))
+    .catch(err => handleError(err, response));
+}
 
 function errorHandler(err){
   console.log(`${err.response} error: ${err.message}`);
