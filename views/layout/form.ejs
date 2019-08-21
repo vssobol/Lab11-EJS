@@ -1,7 +1,7 @@
 <form action ="<%= 'update' === formAction ?'/update/${taskid}': /add' <%> method="post">
 <fieldset>
 <input type="hidden" name= "_method" value= "<%= 'update' === formAction ? 'put' : 'post'">
-<input type="hidden" name= "id" value=<%
+<input type="hidden" name= "id" value=<%>
 
 <label>Title:</label>
 <input type="text" name="title" value="<%= book.title %>"></br>
