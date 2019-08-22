@@ -2,6 +2,8 @@
 #title{
     background: #7e7fae;
     color: white;
+    text-shadow: -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black, 1px 1px 1px black;
+    font-weight: bold;
     display: flex;
     justify-content: space-between;
     padding: 1em;
@@ -11,23 +13,24 @@
 }
 
 #results{
-    background: #c8d3ff;
+    background-image: linear-gradient(to right, #8c99d4, #c8d3ff, #8c99d4);
     color: white;
+    text-shadow: -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black, 1px 1px 1px black;
     padding: 1em;
     text-align: center;
     font-weight: bold;
 }
 
 article > img{
-    border: thick solid #eabd90;
+    border: thick outset #eabd90;
     border-radius: 5px;
-    width: 100%;
-    height: 20em;
+    width: 40%;
+    height: 10em;
 }
 
 article > h4{
     color: white;
-    text-shadow: 2px 0 2px rgba(0,0,0,1);
+    text-shadow: -1px -1px 1px #7e7fae, 1px -1px 1px #7e7fae, -1px 1px 1px #7e7fae, 1px 1px 1px #7e7fae;
     margin: 0 -4em;
     padding: .5em 0;
     font-family: "Sawarabi Mincho", sans-serif;
@@ -77,17 +80,20 @@ label{
 }
 
 button{
+    cursor: pointer;
     text-align: center;
     display: block;
     background: #c8d3ff;
-    color: #7e7fae;
+    color: white;
+    box-shadow: inset 0 0 10px 5px #8c99d4;
+    text-shadow: -1px -1px 1px #7e7fae, 1px -1px 1px #7e7fae, -1px 1px 1px #7e7fae, 1px 1px 1px #7e7fae;
     border: thick outset #eabd90;
     border-radius: 1em;
     font-family: "Sawarabi Mincho", sans-serif;
-    font-size: 24px;
+    font-size: 14px;
     font-weight: bold;
-    margin: 1em auto 1.5em auto;
-    padding: 1em 1.95em;
+    margin: .5em auto .5em auto;
+    padding: .5em 1em;
 }
 
 
