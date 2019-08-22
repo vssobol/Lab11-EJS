@@ -14,9 +14,19 @@ app.use(cors());
 //set up
 const app = express();
 
+
 //database set up
 app.use(express.urlencoded({extended:true}));
 app.use(express.static('./public'));
+
+// this code get
+app.use(methodOverride((request,response))) => {
+if(request.body && typeof request.body=== 'object'&& 'method'in request.body){
+let method = request.body._method;
+delete request.body_method;
+return method;
+}
+}
 
 //listen
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -36,14 +46,22 @@ const PORT=process.env.PORT||8080;
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
 
 //middleware handlers (not middlearth lol) - put and delete
-
+app.use(methodOverride((request, response) => {
+  if (request.body && typeof request.body === 'object' && '_method' in request.body) {
+    // look in urlencoded POST bodies and delete it
+    let method = request.body._method;
+    delete request.body._method;
+    return method;
+  }
+}))
 //API Routes - show and saved library
 app.get('/', showBooks);
 app.get('/details/:book_id', showDetails);
 // make sure to update in book folder
 
-//edit details
+//edit details //update
 app.put('/edit/:book_id', editDetails);
+
 
 //delete book from library
 app.delete('/delete/:book_id', deleteBook);
@@ -84,7 +102,7 @@ console.log(url);
 url+=req.body[0];
 
 //super agent return superagent.get(url)
-.then(apiRes => apiRes.body.items.map(book => new Book(book.volumeInfo)))
+let (apiRes => apiRes.body.items.map(book => new Book(book.volumeInfo)))
 .then(results => res.render('pages/results', {searchResults: results}))
 .catch(err => errorHandler(err));
 });
@@ -150,11 +168,6 @@ app.post('/search', (req, res) =>{
     .then(results => res.render('pages/results', {searchResults: results}))
     .catch(err => errorHandler(err));
 });
-  superagent.get(url)
-    .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
-    .then(results => response.render('pages/searches/search-results', { searchesResults: results}))
-    .catch(err => handleError(err, response))
-
 //console logs
 
 //delete book function
