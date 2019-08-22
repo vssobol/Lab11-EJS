@@ -82,6 +82,7 @@ if(req.body.search[1]==='author')url+='inauthor:';
 url+=req.body.search[0];
 console.log(url);
 url+=req.body[0];
+
 //super agent return superagent.get(url)
 .then(apiRes => apiRes.body.items.map(book => new Book(book.volumeInfo)))
 .then(results => res.render('pages/results', {searchResults: results}))
@@ -149,6 +150,11 @@ app.post('/search', (req, res) =>{
     .then(results => res.render('pages/results', {searchResults: results}))
     .catch(err => errorHandler(err));
 });
+  superagent.get(url)
+    .then(apiResponse => apiResponse.body.items.map(bookResult => new Book(bookResult.volumeInfo)))
+    .then(results => response.render('pages/searches/search-results', { searchesResults: results}))
+    .catch(err => handleError(err, response))
+
 //console logs
 
 //delete book function
