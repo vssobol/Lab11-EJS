@@ -4,7 +4,7 @@
 const express = require('express');
 const superagent = require('superagent');
 const pg = require('pg');
-
+const methodOverride = require('method-override');
 require('dotenv').config();
 
 const cors = require('cors');
@@ -42,26 +42,23 @@ app.set('view engine', 'ejs');
 
 //turn on server -listen
 const PORT=process.env.PORT||8080;
-
 app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
 
 //middleware handlers (not middlearth lol) - put and delete
 app.use(methodOverride((request, response) => {
   if (request.body && typeof request.body === 'object' && '_method' in request.body) {
-    // look in urlencoded POST bodies and delete it
-    let method = request.body._method;
-    delete request.body._method;
-    return method;
+  // look in urlencoded POST bodies and delete it
+  let method = request.body._method;
+  delete request.body._method;
+  return method;
   }
 }))
 //API Routes - show and saved library
 app.get('/', showBooks);
 app.get('/details/:book_id', showDetails);
-// make sure to update in book folder
 
 //edit details //update
 app.put('/edit/:book_id', editDetails);
-
 
 //delete book from library
 app.delete('/delete/:book_id', deleteBook);
@@ -73,8 +70,6 @@ app.post('/add', addBook);
 
 //catch all
 app.get('*', (request, response) => response.status(404).send('This page does not exist'));
-
-
 
 
 // Index
@@ -169,6 +164,22 @@ app.post('/search', (req, res) =>{
     .catch(err => errorHandler(err));
 });
 //console logs
+// Save the selected book to db
+function addBook(request, response) {
+  console.log('sql request', request.body);
+  let {title, author, image_url, description, isbn, bookshelf} = request.body;
+  let SQL = `INSERT INTO books(title, author, image_url, description, isbn, bookshelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`;
+  let values = [title, author, image_url, description, isbn, bookshelf];
+  let id;
+
+  return client.query(SQL, values)
+    .then(result => {
+      id = result.rows[0].id;
+      console.log('id', id);
+      response.redirect(`/details/${id}`);
+    })
+    .catch(err => handleError(err, response))
+}
 
 //delete book function
 function deleteBook(request, response) {

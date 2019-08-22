@@ -6,25 +6,40 @@
         <link rel="stylesheet" href="./css/base.css">
         <link rel="stylesheet" href="./css/layout.css">
         <link rel="stylesheet" href="./css/modules.css">
+        <%- include('components/head') %>
     </head>
     <body>
         <main>
             <h1> Team Awesome's Book App </h1>
-            <section>
+            <h4> <%- include('components/nav') %> My Books</h4>
+            <h5>Total Number of Books: <%= results.length %></h5>
+            <ul>
+              <% results.forEach(book => { %>
+             <li> 
                 <form action="/search" method="post">
                     <legend>Search By Title or Author</legend>
                     <label>
-                        <input type="text" name="search" default="Enter a title or author">
+                    <input type="text" name="search" default="Enter a title or author">
                     </label>
                     <label>Title
-                        <input type="radio" name="search" value="title">
+                    <input type="radio" name="search" value="title">
                     </label>
                     <label>Author
-                        <input type="radio" name="search" value="author">
+                     <input type="radio" name="search" value="author">
                     </label>
-                    <button>Submit</button>
-            </form>
-            </section>
+
+                <li> 
+                <div class='result homediv' data-id="<%= book.id%>">
+                <img src= <%= book.image_url %> />
+                 <%- include('components/basic', {book: book}); %>
+                 <a href="/details/<%= book.id%>"> View Details </a>
+                 </div>
+                 </li>
+                 <% }) %> 
+                 </ul>
+                 <button>Submit</button>
+                 </form>
+
             <script src="app.js"></script
         </main>
     </body>
